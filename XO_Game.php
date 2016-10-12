@@ -2,7 +2,7 @@
 
 define('BOT_TOKEN', '275551262:AAFJ1SUYhW7t2lRBI6CVByVit-YAYs9CvHk');
 define('API_URL', 'https://api.telegram.org/bot'.BOT_TOKEN.'/');
-$admin = "262171688";
+
 function apiRequestWebhook($method, $parameters) {
   if (!is_string($method)) {
     error_log("Method name must be a string\n");
@@ -384,21 +384,3 @@ else if(isset($update["inline_query"])){
 else if(isset($update["callback_query"])){
 	callbackMessage($update["callback_query"]);
 }
-
-}elseif( $fadmin == $admin |  $fadmin == $admin2 and $update->message->text == '/stats'){
-    $txtt = file_get_contents('member.txt');
-    $member_id = explode("\n",$txtt);
-    $mmemcount = count($member_id) -1;
-  bot('sendMessage',[
-      'chat_id'=>$chat_id,
-      'text'=>"کاربران : $mmemcount 👤 "
-    ]);
-	
-	
-	$txxt = file_get_contents('member.txt');
-    $pmembersid= explode("\n",$txxt);
-    if (!in_array($chat_id,$pmembersid)){
-      $aaddd = file_get_contents('member.txt');
-      $aaddd .= $chat_id."\n";
-      file_put_contents('member.txt',$aaddd);
-    }
