@@ -1,6 +1,6 @@
 <?php
 
-define('BOT_TOKEN', '220586335:AAFC7E3Qu9ON1EUwJ7oQkZDpPi2ShO7z7yg');
+define('BOT_TOKEN', '275551262:AAFJ1SUYhW7t2lRBI6CVByVit-YAYs9CvHk');
 define('API_URL', 'https://api.telegram.org/bot'.BOT_TOKEN.'/');
 
 function apiRequestWebhook($method, $parameters) {
@@ -149,11 +149,11 @@ function processMessage($message) {
     $text = $message['text'];
 
     if (strpos($text, "/start") === 0) {
-      apiRequestJson("sendMessage", array('chat_id' => $chat_id, "text" => "اگه تو هم تلگرامت آپدیت باشه این دکمه های شیشه ای رو دیدی صددرصد\n ما با همین دکمه ها براتون چند تا بازی آماده کردیم مثل ایکس او و سنگ کاغذ قیچی \n اگه مایلی با دوستات بازی کنی روی لینک زیر کلیک کن. بعد دوستتو انتخاب کن و منتظر باش که بااکس اینلاین ظاهر شه", 'reply_markup' => array(
+      apiRequestJson("sendMessage", array('chat_id' => $chat_id, "text" => "<i>سلام خوش اومدی😃</i>\nبرای بازی کردن بر روی بازی سرخ ابی کلیک کن و هرجا که خواستی بازی کنی رو انتخاب کن گروه یا پیوی دوستتو\n بعدا میتونی باهاش بازی کنی امید وارم که از این بازی لذت کافی رو ببرین \n سازنده:</i> @Vahshi_typer", 'reply_markup' => array(
             "inline_keyboard"=>array(
 			    array(array("text"=>"توسعه دهنده","url"=>"https://telegram.me/Vahshi_Typer")),
 				array(array("text"=>"چنل","url"=>"https://telegram.me/shaghestan")),
-			    array(array("text"=>"بازی XO","switch_inline_query"=>md5(date("YMDms"))),array("text"=>"سنگ کاغذ قیچی (به زودی)","callback_data"=>"m"))
+			    array(array("text"=>"بازی سرخ ابی","switch_inline_query"=>md5(date("YMDms"))),array("text"=>"سنگ کاغذ قیچی (به زودی)","callback_data"=>"m"))
 			)
 		)));
     } 
@@ -166,7 +166,7 @@ function inlineMessage($inline){
 	$query=$inline['query'];
 	
 	//apiRequest("sendMessage",array("chat_id"=>111825543,"text"=>json_encode($inline['from'])));
-	apiRequest("answerInlineQuery",array("inline_query_id"=>$id,"results"=>array(array("type"=>"article","id"=>$query,"title"=>"بازی XO","input_message_content"=>array("message_text"=>"<b>بازی XO</b>\nسازنده: 
+	apiRequest("answerInlineQuery",array("inline_query_id"=>$id,"results"=>array(array("type"=>"article","id"=>$query,"title"=>"بازی سرخ ابی","input_message_content"=>array("message_text"=>"<i>بازی سرخ ابی</i>\nسازنده: 
 @Vahshi_Typer\n برای شروع روی دگمه زیر کلیک کنید👇🏻👇🏻👇🏻","parse_mode"=>"HTML","disable_web_page_preview"=>false),
 	    "reply_markup"=>array(
 	        "inline_keyboard"=>array(
