@@ -151,7 +151,7 @@ function processMessage($message) {
     if (strpos($text, "/start") === 0) {
       apiRequestJson("sendMessage", array('chat_id' => $chat_id, "text" => "اگه تو هم تلگرامت آپدیت باشه این دکمه های شیشه ای رو دیدی صددرصد\n ما با همین دکمه ها براتون چند تا بازی آماده کردیم مثل ایکس او و سنگ کاغذ قیچی \n اگه مایلی با دوستات بازی کنی روی لینک زیر کلیک کن. بعد دوستتو انتخاب کن و منتظر باش که بااکس اینلاین ظاهر شه", 'reply_markup' => array(
             "inline_keyboard"=>array(
-			    array(array("text"=>"توسعه دهنده","url"=>"https://telegram.me/SiCk_KoN_BaW")),
+			    array(array("text"=>"توسعه دهنده","url"=>"https://telegram.me/Vahshi_Typer")),
 				array(array("text"=>"چنل","url"=>"https://telegram.me/shaghestan")),
 			    array(array("text"=>"بازی XO","switch_inline_query"=>md5(date("YMDms"))),array("text"=>"سنگ کاغذ قیچی (به زودی)","callback_data"=>"m"))
 			)
@@ -166,7 +166,8 @@ function inlineMessage($inline){
 	$query=$inline['query'];
 	
 	//apiRequest("sendMessage",array("chat_id"=>111825543,"text"=>json_encode($inline['from'])));
-	apiRequest("answerInlineQuery",array("inline_query_id"=>$id,"results"=>array(array("type"=>"article","id"=>$query,"title"=>"بازی XO","input_message_content"=>array("message_text"=>"<b>بازی XO</b>\n برای شروع روی دگمه زیر کلیک کنید👇🏻👇🏻👇🏻","parse_mode"=>"HTML","disable_web_page_preview"=>false),
+	apiRequest("answerInlineQuery",array("inline_query_id"=>$id,"results"=>array(array("type"=>"article","id"=>$query,"title"=>"بازی XO","input_message_content"=>array("message_text"=>"<b>بازی XO</b>\nسازنده: 
+@Vahshi_Typer\n برای شروع روی دگمه زیر کلیک کنید👇🏻👇🏻👇🏻","parse_mode"=>"HTML","disable_web_page_preview"=>false),
 	    "reply_markup"=>array(
 	        "inline_keyboard"=>array(
 			    array(array("text"=>"شروع بازی!","callback_data"=>"play_".$chat_id))
@@ -204,7 +205,7 @@ function callbackMessage($callback){
 			  $Tab[3][0]["text"]="ترک بازی!";
 			  $Tab[3][0]["callback_data"]="Left";
 			  
-			  apiRequest("editMessageText",array("inline_message_id"=>$message_id,"text"=>"بازی آغاز شد\n\n بازیکن اول:$P1Name(❌)\nبازیکن دوم:$P2Name(⭕️)\n\n هم اکنون نوبت $P1Name(❌) است.","reply_markup"=>array(
+			  apiRequest("editMessageText",array("inline_message_id"=>$message_id,"text"=>"بازی آغاز شد\n\n بازیکن اول:$P1Name(🔵)\nبازیکن دوم:$P2Name(🔴)\n\n هم اکنون نوبت $P1Name(🔵) است.","reply_markup"=>array(
 			    "inline_keyboard"=>$Tab 
 			  )));
 			  exit;
@@ -249,21 +250,21 @@ function callbackMessage($callback){
 			  if($pv_id==$Player1) {
 				$NextTurn=$Player2;
 				$NextTurnNum=2;
-				$Emoji="❌";
-				$NextEmoji="⭕️";
+				$Emoji="🔵";
+				$NextEmoji="🔴";
 			  }
 			  else {
 				$NextTurn=$Player1;
 				$NextTurnNum=1;
-				$Emoji="⭕️";
-				$NextEmoji="❌";
+				$Emoji="🔴";
+				$NextEmoji="🔵";
 			  }
 			  //TabComplete
 			  $n=0;
 			  for($ii=0;$ii<3;$ii++){
 				  for($jj=0;$jj<3;$jj++){
-					if((int)$table[$n]==1) $Tab[$ii][$jj]["text"]="❌";  
-					else if((int)$table[$n]==2) $Tab[$ii][$jj]["text"]="⭕️";  
+					if((int)$table[$n]==1) $Tab[$ii][$jj]["text"]="🔵";  
+					else if((int)$table[$n]==2) $Tab[$ii][$jj]["text"]="🔴";  
 					else if((int)$table[$n]==0) $Tab[$ii][$jj]["text"]=" ";  
 					$n++;  
 				  }
@@ -272,24 +273,24 @@ function callbackMessage($callback){
 			  //Tab End
 			  //NextTurn
 			  
-			  if($Tab[$i][$j]["text"]!=" ") apiRequest("answerCallbackQuery",array('callback_query_id'=>$callback_id,'text'=>"شما نمیتوانید دگمه مورد نظر را انتخاب کنید.",'show_alert'=>false));
+			  if($Tab[$i][$j]["text"]!=" ") apiRequest("answerCallbackQuery",array('callback_query_id'=>$callback_id,'text'=>"شما نمیتوانید دکمه مورد نظر را انتخاب کنید.",'show_alert'=>false));
 			  else{
 				  $Tab[$i][$j]["text"]=$Emoji;
                   //
 				  $n=0;
                   for($i=0;$i<3;$i++){
 					  for($j=0;$j<3;$j++){
-						  if($Tab[$i][$j]["text"]=="❌") $table[$n]=1;  
-						  else if($Tab[$i][$j]["text"]=="⭕️") $table[$n]=2;  
+						  if($Tab[$i][$j]["text"]=="🔵") $table[$n]=1;  
+						  else if($Tab[$i][$j]["text"]=="🔴") $table[$n]=2;  
 						  else if($Tab[$i][$j]["text"]==" ") $table[$n]=0;
 						  $n++;
 					  }
 				  }
                   //				  
-				    if(Win($Tab)=="⭕️"||Win($Tab)=="❌") {
+				    if(Win($Tab)=="🔴"||Win($Tab)=="🔵") {
 						
-						if(Win($Tab)=="⭕️") $winner=getChat($Player2);
-						else if(Win($Tab)=="❌") $winner=getChat($Player1);
+						if(Win($Tab)=="🔴") $winner=getChat($Player2);
+						else if(Win($Tab)=="🔵") $winner=getChat($Player1);
                         
 						$n=0;
                         for($ii=0;$ii<3;$ii++){
@@ -299,7 +300,7 @@ function callbackMessage($callback){
 							}
 						}
 						
-					    apiRequest("editMessageText",array("inline_message_id"=>$message_id,"text"=>"بازیکن اول:$P1Name(❌)\nبازیکن دوم:$P2Name(⭕️)\n\nبرنده:".$winner."(".Win($Tab).")","reply_markup"=>array(
+					    apiRequest("editMessageText",array("inline_message_id"=>$message_id,"text"=>"بازیکن اول:$P1Name(🔵)\nبازیکن دوم:$P2Name(🔴)\n\nبرنده:".$winner."(".Win($Tab).")","reply_markup"=>array(
 			                "inline_keyboard"=>$Tab 
 			            )));  
 					    exit;
@@ -316,7 +317,7 @@ function callbackMessage($callback){
 							}
 						}
 						
-					    apiRequest("editMessageText",array("inline_message_id"=>$message_id,"text"=>"بازیکن اول:$P1Name(❌)\nبازیکن دوم:$P2Name(⭕️)\n\nبازی مساوی شد!","reply_markup"=>array(
+					    apiRequest("editMessageText",array("inline_message_id"=>$message_id,"text"=>"بازیکن اول:$P1Name(🔵)\nبازیکن دوم:$P2Name(🔴)\n\nبازی مساوی شد!","reply_markup"=>array(
 			                "inline_keyboard"=>$Tab 
 			            )));  
 					    exit;
@@ -341,7 +342,7 @@ function callbackMessage($callback){
 						//Tab
 						
 						$NextTurn=getChat($NextTurn);
-				        apiRequest("editMessageText",array("inline_message_id"=>$message_id,"text"=>"بازیکن اول:$P1Name(❌)\nبازیکن دوم:$P2Name(⭕️)\n\n هم اکنون نوبت $NextTurn($NextEmoji) است.","reply_markup"=>array(
+				        apiRequest("editMessageText",array("inline_message_id"=>$message_id,"text"=>"بازیکن اول:$P1Name(🔵)\nبازیکن دوم:$P2Name(🔴)\n\n هم اکنون نوبت $NextTurn($NextEmoji) است.","reply_markup"=>array(
 			                "inline_keyboard"=>$Tab 
 			            )));
 					    exit;
